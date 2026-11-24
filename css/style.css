@@ -1,0 +1,857 @@
+/* ==========================================================
+   STYLE.CSS - Peminjaman Kit Kelas FILKOM
+   Mengatur tampilan aplikasi peminjaman, pengembalian, dan
+   verifikasi Kit Kelas.
+   Layout dibuat mobile-first dengan bingkai aplikasi selebar
+   390px. Pada layar desktop, bingkai ditampilkan seperti mockup
+   perangkat agar nyaman untuk melihat dan menguji prototipe.
+   ========================================================== */
+
+/* ---------- 1. Variabel warna, tipografi, dan animasi ---------- */
+/* Nilai ini dipakai ulang oleh komponen agar warna dan gaya konsisten. */
+:root {
+  --bg: #F2F6FC;
+  --surf: #fff;
+  --t1: #0A1936;
+  --t2: #4A5878;
+  --t3: #6B7794;
+  --bd: rgba(10, 25, 54, .12);
+  --blue: #245CE4;
+  --blue-h: #1D4BC0;
+  --blue-a: #D3E0FA;
+  --blue-t: #E8EFFC;
+  --ok-bg: #E4F4EC;
+  --ok: #11523A;
+  --warn: #B45309;
+  --bad-bg: #FCEEEE;
+  --bad: #7F2E2D;
+  --line: #5F6F8F;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ---------- 2. Reset dasar dan wadah aplikasi ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  font: 400 16px/24px var(--sans);
+  color: var(--t1);
+  background: #E4EAF5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Wadah utama membatasi lebar layar aplikasi dan menyediakan area scroll. */
+#app {
+  width: 100%;
+  max-width: 390px;
+  height: 100vh;
+  height: 100dvh;
+  flex: none;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.scr {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (min-width: 481px) {
+  body {
+    align-items: center;
+  }
+
+  #app {
+    margin-top: 16px;
+    height: min(844px, calc(100vh - 32px));
+    border-radius: 40px;
+    border: 10px solid var(--t1);
+    box-shadow: 0 16px 48px rgba(10, 25, 54, .25);
+  }
+}
+
+/* ---------- 3. Ikon, header, navigasi, dan tipografi ---------- */
+svg.i {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 16px;
+  min-height: 56px;
+  background: var(--surf);
+  border-bottom: 1px solid var(--bd);
+  font-weight: 600;
+}
+
+.lg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  background: var(--surf);
+  border-bottom: 1px solid var(--bd);
+}
+
+nav button {
+  flex: 1;
+  min-height: 44px;
+  border: 0;
+  background: none;
+  font: 500 14px var(--sans);
+  color: var(--t2);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color .15s var(--ease);
+}
+
+nav button:hover {
+  color: var(--t1);
+}
+
+nav button.on {
+  color: var(--blue);
+  font-weight: 600;
+  border-color: var(--blue);
+}
+
+main {
+  flex: 1;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+h1 {
+  font: 600 32px/40px var(--sans);
+}
+
+h2 {
+  font: 600 24px/32px var(--sans);
+}
+
+h3 {
+  font: 600 20px/28px var(--sans);
+}
+
+.cap {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--t2);
+}
+
+.sm {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.t2 {
+  color: var(--t2);
+}
+
+/* ---------- 4. Kartu, tombol, dan kontrol formulir ---------- */
+.card {
+  background: var(--surf);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.blk {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.btn {
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--blue);
+  background: var(--blue);
+  color: #fff;
+  font: 600 16px var(--sans);
+  cursor: pointer;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background-color .15s var(--ease),
+    color .15s var(--ease),
+    transform .1s var(--ease);
+}
+
+.btn:hover {
+  background: var(--blue-h);
+}
+
+.btn:active {
+  transform: scale(.98);
+  background: #1A43A8;
+}
+
+.btn.out {
+  background: var(--surf);
+  color: var(--blue);
+}
+
+.btn.out:hover {
+  background: var(--blue-t);
+  color: var(--blue-h);
+}
+
+.btn.out:active {
+  background: var(--blue-a);
+}
+
+.btn.sm {
+  min-height: 44px;
+  width: auto;
+  font-size: 14px;
+}
+
+.btn.gray {
+  border-color: var(--line);
+  color: var(--t1);
+  background: var(--surf);
+}
+
+.btn.gray:hover {
+  background: var(--blue-t);
+}
+
+.btn.q {
+  border-color: transparent;
+  background: none;
+  color: var(--blue);
+}
+
+.btn.q:hover {
+  background: var(--blue-t);
+}
+
+.btn.danger {
+  background: var(--bad);
+  border-color: var(--bad);
+}
+
+.btn.danger:hover {
+  background: #672423;
+}
+
+.btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.row > * {
+  flex: 1;
+}
+
+label {
+  font: 600 14px/20px var(--sans);
+  display: block;
+  margin-bottom: 4px;
+}
+
+input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  font: 16px var(--sans);
+  color: var(--t1);
+  background: #fff;
+}
+
+.help {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--t2);
+  margin-top: 4px;
+}
+
+/* ---------- 5. Pesan status dan ringkasan aktivitas ---------- */
+.err {
+  background: var(--bad-bg);
+  color: var(--bad);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.err svg {
+  margin-top: 1px;
+}
+
+.info {
+  background: var(--blue-t);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.info svg {
+  color: var(--blue);
+  margin-top: 1px;
+}
+
+.st {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 14px/20px var(--sans);
+  white-space: nowrap;
+}
+
+.st i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.st.w {
+  color: var(--warn);
+}
+
+.st.o {
+  color: var(--ok);
+}
+
+.st.b {
+  color: var(--bad);
+}
+
+#lab {
+  width: 100%;
+  max-width: 390px;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- 6. Daftar peminjaman dan pilihan ruangan ---------- */
+.li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 1px solid var(--bd);
+}
+
+.li:last-child {
+  border: 0;
+}
+
+.dd-btn {
+  width: 100%;
+  min-height: 44px;
+  text-align: left;
+  padding: 0 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  font: 16px var(--sans);
+  color: var(--t1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dd-list {
+  border: 1.5px solid var(--blue);
+  border-radius: 8px;
+  margin-top: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.dd-list button {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: #fff;
+  font: 16px var(--sans);
+  color: var(--t1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color .15s var(--ease);
+}
+
+.dd-list button:hover:not(:disabled) {
+  background: var(--blue-t);
+}
+
+.dd-list button:disabled {
+  color: var(--t3);
+  cursor: not-allowed;
+}
+
+/* ---------- 7. Tiket peminjaman/pengembalian dan QR ---------- */
+/* QR pada prototipe berupa ilustrasi; bukan kode yang dapat dipindai kamera. */
+.tk {
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tk-top {
+  padding: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.qr {
+  width: 176px;
+  height: 176px;
+  position: relative;
+}
+
+.qr.dim svg {
+  opacity: .15;
+}
+
+.qr .ov {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.tk-cut {
+  border-top: 1.5px dashed rgba(10, 25, 54, .2);
+  position: relative;
+}
+
+.tk-cut::before,
+.tk-cut::after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+}
+
+.tk-cut::before {
+  left: -9px;
+}
+
+.tk-cut::after {
+  right: -9px;
+}
+
+.tk-stub {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.code {
+  font: 700 24px/32px var(--mono);
+}
+
+.tm {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--t2);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 14px/20px var(--mono);
+}
+
+.tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--t3);
+}
+
+/* ---------- 8. Pemindaian simulasi dan hasil verifikasi ---------- */
+.spin {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--blue);
+  border-top-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: sp .8s linear infinite;
+}
+
+@keyframes sp {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cam {
+  background: var(--t1);
+  border-radius: 8px;
+  height: 152px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  color: #aab6d6;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.cam.go::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 16px;
+  height: 2px;
+  background: #6c95f5;
+  animation: scan .9s var(--ease) infinite alternate;
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(120px);
+  }
+}
+
+.res {
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.res.ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.res.no {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 4px 8px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---------- 9. Filter, tabel riwayat, dan pagination ---------- */
+.seg {
+  display: flex;
+  background: #E2E9F6;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.seg button {
+  flex: 1 1 auto;
+  padding: 0 8px;
+  white-space: nowrap;
+  min-height: 40px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  font: 500 14px var(--sans);
+  cursor: pointer;
+  color: var(--t1);
+  transition:
+    background-color .15s var(--ease),
+    color .15s var(--ease);
+}
+
+.seg button.on {
+  background: var(--blue);
+  color: #fff;
+}
+
+.tw {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+th {
+  background: #E2E9F6;
+  text-align: left;
+  padding: 8px;
+  font: 600 12px/16px var(--sans);
+  color: var(--t2);
+}
+
+td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--bd);
+}
+
+tr.rw {
+  cursor: pointer;
+}
+
+tr.rw:hover,
+tr.sel {
+  background: var(--blue-t);
+}
+
+.pg {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.pg button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: #fff;
+  font: 500 14px var(--sans);
+  color: var(--t1);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.pg button.on {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+/* ---------- 10. Footer, dialog konfirmasi, dan notifikasi ---------- */
+footer {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--t2);
+  background: var(--surf);
+  border-top: 1px solid var(--bd);
+}
+
+footer.cnt {
+  font-family: var(--mono);
+  color: var(--t1);
+  font-weight: 500;
+}
+
+footer a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ov-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 54, .6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fd .2s var(--ease);
+}
+
+@keyframes fd {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 380px;
+  width: 100%;
+  position: relative;
+  animation: sc .2s var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(10, 25, 54, .2);
+}
+
+@keyframes sc {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+.x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--t1);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+
+.x:hover {
+  background: var(--blue-t);
+}
+
+.modal .ib {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--bad-bg);
+  color: var(--bad);
+  display: grid;
+  place-items: center;
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: var(--t1);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  z-index: 9;
+  max-width: 90%;
+}
+
+.ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--blue-t);
+  display: grid;
+  place-items: center;
+  color: var(--blue);
+  flex: none;
+}
+
+.hd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.big {
+  font: 700 32px/40px var(--mono);
+}
+
+/* Hormati pengaturan aksesibilitas untuk mengurangi gerakan animasi. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
