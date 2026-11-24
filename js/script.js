@@ -5,6 +5,17 @@
    Data ruangan dan data awal dimuat lebih dahulu dari data.js.
    ========================================================== */
 
+      /* DAFTAR ISI
+   1. Ikon, waktu, state aplikasi, helper (ikon, S, status) ... baris 20
+   2. Pembuatan QR dan tiket (QR, timer 5 menit) ............... baris 145
+   3. Layar login, beranda, pinjam, kembali .................... baris 339
+   4. Layar pindai petugas dan riwayat ......................... baris 589
+   5. Render ulang dan notifikasi (header, nav, modal, toast) .. baris 792
+   6. Aksi tombol act() (login, pick, cancel, dll) ............. baris 957
+   7. Verifikasi peminjaman dan pengembalian ................... baris 1076
+   8. Panel uji dan reset data demo ............................ baris 1155
+   9. Event panel uji, input, dan dialog ....................... baris 1304
+
 /* ---------- 1. Ikon, waktu, state aplikasi, dan helper ---------- */
 const $ = (selector) => document.querySelector(selector);
 
