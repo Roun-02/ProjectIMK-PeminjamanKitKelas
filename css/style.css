@@ -8,39 +8,61 @@
    ========================================================== */
 
 /* ---------- 1. Variabel warna, tipografi, dan animasi ---------- */
-/* Nilai ini dipakai ulang oleh komponen agar warna dan gaya konsisten. */
+/* Wadah pusat seluruh variabel warna & font; ubah nilai di sini untuk mengganti warna satu aplikasi sekaligus */
 :root {
+  /* Latar belakang utama layar aplikasi | Warna: Biru sangat muda / abu-abu kebiruan */
   --bg: #F2F6FC;
+  /* Latar permukaan kartu, header, menu tab, dan footer | Warna: Putih bersih */
   --surf: #fff;
+  /* Warna teks utama, judul, dan bingkai HP | Warna: Biru dongker gelap (hampir hitam) */
   --t1: #0A1936;
+  /* Warna teks sekunder / deskripsi kecil | Warna: Abu-abu kebiruan tua */
   --t2: #4A5878;
+  /* Warna teks nonaktif / keterangan pilihan terkunci | Warna: Abu-abu kebiruan sedang */
   --t3: #6B7794;
+  /* Garis batas / border tipis antar elemen | Warna: Biru dongker transparan 12% */
   --bd: rgba(10, 25, 54, .12);
+  /* Warna tema utama (tombol utama, tab aktif, ikon, aksen) | Warna: Biru cerah */
   --blue: #245CE4;
+  /* Warna tombol utama saat kursor diarahkan (hover) | Warna: Biru sedikit lebih gelap */
   --blue-h: #1D4BC0;
+  /* Warna tombol putih outline saat ditekan (active) | Warna: Biru pastel muda */
   --blue-a: #D3E0FA;
+  /* Latar kotak panduan (.info), kotak ikon (.ic), & hover lembut | Warna: Biru sangat pucat */
   --blue-t: #E8EFFC;
+  /* Latar kotak notifikasi berhasil | Warna: Hijau mint sangat muda */
   --ok-bg: #E4F4EC;
+  /* Teks dan ikon untuk status "Selesai" & pesan sukses | Warna: Hijau tua */
   --ok: #11523A;
+  /* Teks dan ikon untuk status "Dipinjam" (sedang berlangsung) | Warna: Kuning kecokelatan / oranye tua */
   --warn: #B45309;
+  /* Latar kotak pesan error atau peringatan | Warna: Merah muda pucat */
   --bad-bg: #FCEEEE;
+  /* Teks error, status "Belum Kembali", & tombol bahaya | Warna: Merah marun tua */
   --bad: #7F2E2D;
+  /* Garis tepi kotak input & tombol abu-abu | Warna: Abu-abu kebiruan */
   --line: #5F6F8F;
+  /* Jenis huruf utama untuk teks biasa */
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Jenis huruf angka/kode ruangan agar sejajar (monospace) */
   --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  /* Kurva kehalusan animasi transisi */
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
 /* ---------- 2. Reset dasar dan wadah aplikasi ---------- */
+/* Mereset margin bawaan browser dan menyamakan perhitungan ukuran kotak untuk semua elemen */
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
+/* Mengatur tinggi halaman penuh 100% */
 html {
   height: 100%;
 }
 
+/* Mengatur kanvas luar layar browser | Warna: Teks biru dongker (--t1), latar luar biru keabu-abuan lembut (#E4EAF5) */
 body {
   min-height: 100%;
   font: 400 16px/24px var(--sans);
@@ -51,7 +73,7 @@ body {
   align-items: center;
 }
 
-/* Wadah utama membatasi lebar layar aplikasi dan menyediakan area scroll. */
+/* Bingkai utama layar aplikasi selebar HP (390px) | Warna: Latar biru sangat muda (--bg) */
 #app {
   width: 100%;
   max-width: 390px;
@@ -63,6 +85,7 @@ body {
   overflow: hidden;
 }
 
+/* Area gulir (scroll) vertikal di dalam layar aplikasi */
 .scr {
   height: 100%;
   overflow-y: auto;
@@ -72,6 +95,7 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* Tampilan mockup bingkai HP jika dibuka di layar laptop/desktop | Warna: Bingkai & bayangan biru dongker gelap (--t1) */
 @media (min-width: 481px) {
   body {
     align-items: center;
@@ -87,6 +111,7 @@ body {
 }
 
 /* ---------- 3. Ikon, header, navigasi, dan tipografi ---------- */
+/* Ukuran dan ketebalan garis seluruh ikon SVG */
 svg.i {
   width: 18px;
   height: 18px;
@@ -98,6 +123,7 @@ svg.i {
   flex: none;
 }
 
+/* Bilah bagian paling atas aplikasi (nama user & tombol keluar/beranda) | Warna: Latar putih (--surf), garis bawah tipis (--bd) */
 header {
   display: flex;
   align-items: center;
@@ -110,12 +136,14 @@ header {
   font-weight: 600;
 }
 
+/* Wadah logo dan judul di dalam header */
 .lg {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+/* Kotak logo kecil "FK" di pojok kiri atas | Warna: Latar biru utama (--blue), tulisan putih (#fff) */
 .mark {
   width: 24px;
   height: 24px;
@@ -128,12 +156,14 @@ header {
   font-weight: 600;
 }
 
+/* Bilah menu navigasi tab (Beranda, Pinjam, Kembali) | Warna: Latar putih (--surf), garis bawah tipis (--bd) */
 nav {
   display: flex;
   background: var(--surf);
   border-bottom: 1px solid var(--bd);
 }
 
+/* Tombol tab navigasi saat tidak aktif | Warna: Teks abu-abu kebiruan (--t2), latar transparan */
 nav button {
   flex: 1;
   min-height: 44px;
@@ -146,16 +176,19 @@ nav button {
   transition: color .15s var(--ease);
 }
 
+/* Tombol tab navigasi saat kursor diarahkan | Warna: Teks berubah gelap (--t1) */
 nav button:hover {
   color: var(--t1);
 }
 
+/* Tombol tab navigasi yang sedang aktif dibuka | Warna: Teks dan garis bawah biru utama (--blue) */
 nav button.on {
   color: var(--blue);
   font-weight: 600;
   border-color: var(--blue);
 }
 
+/* Area konten utama di tengah layar */
 main {
   flex: 1;
   padding: 24px 16px;
@@ -164,34 +197,41 @@ main {
   gap: 24px;
 }
 
+/* Judul besar halaman (ukuran 32px) */
 h1 {
   font: 600 32px/40px var(--sans);
 }
 
+/* Judul bagian / section (ukuran 24px, seperti "Layanan Kit Kelas" & "Peminjaman Aktif") */
 h2 {
   font: 600 24px/32px var(--sans);
 }
 
+/* Subjudul kartu (ukuran 20px, seperti "Kembalikan Kit Kelas" & "Status Terakhir") */
 h3 {
   font: 600 20px/28px var(--sans);
 }
 
+/* Teks keterangan kecil / caption | Warna: Abu-abu kebiruan (--t2) */
 .cap {
   font-size: 12px;
   line-height: 16px;
   color: var(--t2);
 }
 
+/* Teks ukuran sedang-kecil (14px) */
 .sm {
   font-size: 14px;
   line-height: 20px;
 }
 
+/* Class pembantu untuk mewarnai teks menjadi abu-abu kebiruan (--t2) */
 .t2 {
   color: var(--t2);
 }
 
 /* ---------- 4. Kartu, tombol, dan kontrol formulir ---------- */
+/* Kotak kartu layanan di Beranda | Warna: Latar putih (--surf), garis tepi tipis (--bd) */
 .card {
   background: var(--surf);
   border: 1px solid var(--bd);
@@ -202,17 +242,20 @@ h3 {
   gap: 16px;
 }
 
+/* Wadah pengelompokan vertikal antar elemen dalam satu section */
 .blk {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+/* Gaya huruf monospace untuk kode ruangan, jam, dan hitung mundur timer */
 .mono {
   font-family: var(--mono);
   font-variant-numeric: tabular-nums;
 }
 
+/* Tombol utama standar (seperti tombol "Kembalikan") | Warna: Latar & garis tepi biru utama (--blue), teks putih (#fff) */
 .btn {
   min-height: 48px;
   padding: 0 16px;
@@ -233,89 +276,107 @@ h3 {
     transform .1s var(--ease);
 }
 
+/* Tombol utama saat kursor diarahkan (hover) | Warna: Biru lebih gelap (--blue-h) */
 .btn:hover {
   background: var(--blue-h);
 }
 
+/* Tombol utama saat sedang ditekan/diklik | Warna: Biru tua pekat (#1A43A8) */
 .btn:active {
   transform: scale(.98);
   background: #1A43A8;
 }
 
+/* Variasi tombol outline (seperti "Mulai Kembalikan" & "Ke Beranda") | Warna: Latar putih (--surf), teks & garis biru (--blue) */
 .btn.out {
   background: var(--surf);
   color: var(--blue);
 }
 
+/* Tombol outline saat kursor diarahkan | Warna: Latar biru sangat pucat (--blue-t), teks biru gelap (--blue-h) */
 .btn.out:hover {
   background: var(--blue-t);
   color: var(--blue-h);
 }
 
+/* Tombol outline saat ditekan | Warna: Latar biru pastel muda (--blue-a) */
 .btn.out:active {
   background: var(--blue-a);
 }
 
+/* Variasi ukuran tombol lebih kecil & lebar menyesuaikan isi (seperti tombol "Buat QR Baru") */
 .btn.sm {
   min-height: 44px;
   width: auto;
   font-size: 14px;
 }
 
+/* Variasi tombol netral/abu-abu (seperti "Ganti Ruangan") | Warna: Latar putih (--surf), garis abu-abu (--line), teks gelap (--t1) */
 .btn.gray {
   border-color: var(--line);
   color: var(--t1);
   background: var(--surf);
 }
 
+/* Tombol abu-abu saat kursor diarahkan | Warna: Latar biru sangat pucat (--blue-t) */
 .btn.gray:hover {
   background: var(--blue-t);
 }
 
+/* Variasi tombol transparan tanpa kotak (seperti tombol simulasi di bawah QR) | Warna: Latar transparan, teks biru (--blue) */
 .btn.q {
   border-color: transparent;
   background: none;
   color: var(--blue);
 }
 
+/* Tombol transparan saat kursor diarahkan | Warna: Latar biru sangat pucat (--blue-t) */
 .btn.q:hover {
   background: var(--blue-t);
 }
 
+/* Variasi tombol bahaya/batal | Warna: Latar & garis merah marun tua (--bad), teks putih */
 .btn.danger {
   background: var(--bad);
   border-color: var(--bad);
 }
 
+/* Tombol merah saat kursor diarahkan | Warna: Merah marun lebih gelap (#672423) */
 .btn.danger:hover {
   background: #672423;
 }
 
+/* Tampilan tombol saat terkunci (disabled, misal saat loading QR) | Warna: Sama seperti tombolnya namun pudar 45% */
 .btn:disabled {
   opacity: .45;
   cursor: not-allowed;
 }
 
+/* Garis fokus aksesibilitas saat navigasi memakai keyboard (Tab) | Warna: Garis luar biru utama (--blue) */
 :focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
 
+/* Wadah untuk mensejajarkan dua tombol berdampingan secara horizontal */
 .row {
   display: flex;
   gap: 8px;
 }
 
+/* Membagi lebar setiap elemen di dalam .row sama rata */
 .row > * {
   flex: 1;
 }
 
+/* Label judul di atas kolom input form */
 label {
   font: 600 14px/20px var(--sans);
   display: block;
   margin-bottom: 4px;
 }
 
+/* Kotak ketik input teks/password | Warna: Latar putih (#fff), teks gelap (--t1), garis tepi abu-abu kebiruan (--line) */
 input {
   width: 100%;
   min-height: 44px;
@@ -327,6 +388,7 @@ input {
   background: #fff;
 }
 
+/* Teks petunjuk kecil di bawah kotak input | Warna: Abu-abu kebiruan (--t2) */
 .help {
   font-size: 12px;
   line-height: 16px;
@@ -335,6 +397,7 @@ input {
 }
 
 /* ---------- 5. Pesan status dan ringkasan aktivitas ---------- */
+/* Kotak pemberitahuan error | Warna: Latar merah muda pucat (--bad-bg), teks merah marun tua (--bad) */
 .err {
   background: var(--bad-bg);
   color: var(--bad);
@@ -347,10 +410,12 @@ input {
   align-items: flex-start;
 }
 
+/* Posisi ikon di dalam kotak error */
 .err svg {
   margin-top: 1px;
 }
 
+/* Kotak panduan informasi (seperti pesan kosong & instruksi loker di halaman Kembali) | Warna: Latar biru sangat pucat (--blue-t) */
 .info {
   background: var(--blue-t);
   border-radius: 8px;
@@ -362,11 +427,13 @@ input {
   align-items: flex-start;
 }
 
+/* Ikon "i" di dalam kotak informasi | Warna: Biru utama (--blue) */
 .info svg {
   color: var(--blue);
   margin-top: 1px;
 }
 
+/* Wadah dasar badge status transaksi (Dipinjam / Selesai / Belum Kembali) */
 .st {
   display: inline-flex;
   align-items: center;
@@ -375,6 +442,7 @@ input {
   white-space: nowrap;
 }
 
+/* Titik bulat indikator kecil di samping teks status | Warna: Mengikuti warna teks induknya */
 .st i {
   width: 8px;
   height: 8px;
@@ -382,18 +450,22 @@ input {
   background: currentColor;
 }
 
+/* Warna status "Dipinjam" (warning) | Warna: Kuning kecokelatan / oranye tua (--warn) */
 .st.w {
   color: var(--warn);
 }
 
+/* Warna status "Selesai" (ok) | Warna: Hijau tua (--ok) */
 .st.o {
   color: var(--ok);
 }
 
+/* Warna status "Belum Kembali" (bad) | Warna: Merah marun tua (--bad) */
 .st.b {
   color: var(--bad);
 }
 
+/* Wadah panel "Uji coba skenario" di bawah bingkai HP */
 #lab {
   width: 100%;
   max-width: 390px;
@@ -404,6 +476,7 @@ input {
 }
 
 /* ---------- 6. Daftar peminjaman dan pilihan ruangan ---------- */
+/* Satu baris item daftar (Peminjaman Aktif, Status Terakhir, Riwayat Saya) | Warna: Garis pemisah bawah tipis (--bd) */
 .li {
   display: flex;
   justify-content: space-between;
@@ -412,10 +485,12 @@ input {
   border-bottom: 1px solid var(--bd);
 }
 
+/* Menghilangkan garis pemisah pada baris paling terakhir */
 .li:last-child {
   border: 0;
 }
 
+/* Tombol dropdown pemilih ruangan | Warna: Latar putih (#fff), garis tepi abu-abu (--line), teks gelap (--t1) */
 .dd-btn {
   width: 100%;
   min-height: 44px;
@@ -432,6 +507,7 @@ input {
   cursor: pointer;
 }
 
+/* Kotak daftar pilihan ruangan yang terbuka di bawah dropdown | Warna: Latar putih (#fff), garis tepi biru (--blue) */
 .dd-list {
   border: 1.5px solid var(--blue);
   border-radius: 8px;
@@ -440,6 +516,7 @@ input {
   overflow: hidden;
 }
 
+/* Setiap baris opsi ruangan di dalam dropdown | Warna: Latar putih (#fff), teks gelap (--t1) */
 .dd-list button {
   width: 100%;
   min-height: 44px;
@@ -456,17 +533,19 @@ input {
   transition: background-color .15s var(--ease);
 }
 
+/* Pilihan ruangan saat kursor diarahkan | Warna: Latar biru sangat pucat (--blue-t) */
 .dd-list button:hover:not(:disabled) {
   background: var(--blue-t);
 }
 
+/* Pilihan ruangan yang sedang dipinjam orang lain (disabled) | Warna: Teks abu-abu pudar (--t3) */
 .dd-list button:disabled {
   color: var(--t3);
   cursor: not-allowed;
 }
 
 /* ---------- 7. Tiket peminjaman/pengembalian dan QR ---------- */
-/* QR pada prototipe berupa ilustrasi; bukan kode yang dapat dipindai kamera. */
+/* Kartu wadah luar tiket QR Code | Warna: Latar putih (#fff), garis tepi tipis (--bd) */
 .tk {
   background: #fff;
   border: 1px solid var(--bd);
@@ -474,22 +553,26 @@ input {
   overflow: hidden;
 }
 
+/* Bagian atas tiket tempat posisi gambar QR Code berada */
 .tk-top {
   padding: 24px;
   display: grid;
   place-items: center;
 }
 
+/* Kotak ukuran gambar QR Code (176x176px) */
 .qr {
   width: 176px;
   height: 176px;
   position: relative;
 }
 
+/* Meredupkan gambar QR menjadi transparan 15% saat status tiket kedaluwarsa */
 .qr.dim svg {
   opacity: .15;
 }
 
+/* Tulisan "QR kedaluwarsa" yang muncul tepat di tengah QR yang meredup */
 .qr .ov {
   position: absolute;
   inset: 0;
@@ -500,11 +583,13 @@ input {
   text-align: center;
 }
 
+/* Garis putus-putus pemisah tiket bagian atas dan bawah | Warna: Biru dongker transparan 20% */
 .tk-cut {
   border-top: 1.5px dashed rgba(10, 25, 54, .2);
   position: relative;
 }
 
+/* Efek lubang setengah lingkaran di sisi kiri & kanan tiket | Warna: Mengikuti warna latar belakang layar (--bg) */
 .tk-cut::before,
 .tk-cut::after {
   content: "";
@@ -517,14 +602,17 @@ input {
   border: 1px solid var(--bd);
 }
 
+/* Posisi lubang sobekan tiket sebelah kiri */
 .tk-cut::before {
   left: -9px;
 }
 
+/* Posisi lubang sobekan tiket sebelah kanan */
 .tk-cut::after {
   right: -9px;
 }
 
+/* Bagian bawah tiket berisi nama ruangan, nama peminjam, dan timer berlaku */
 .tk-stub {
   padding: 16px 24px;
   display: flex;
@@ -533,16 +621,19 @@ input {
   gap: 8px;
 }
 
+/* Teks kode ruangan besar pada tiket (ukuran 24px tebal monospace) */
 .code {
   font: 700 24px/32px var(--mono);
 }
 
+/* Teks hitung mundur waktu berlaku QR | Warna: Abu-abu kebiruan (--t2) */
 .tm {
   font-size: 12px;
   line-height: 16px;
   color: var(--t2);
 }
 
+/* Label tag status kecil */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -550,6 +641,7 @@ input {
   font: 500 14px/20px var(--mono);
 }
 
+/* Titik bulat kecil berbingkai di samping teks .tag | Warna: Garis abu-abu kebiruan (--t3) */
 .tag::before {
   content: "";
   width: 6px;
@@ -559,6 +651,7 @@ input {
 }
 
 /* ---------- 8. Pemindaian simulasi dan hasil verifikasi ---------- */
+/* Ikon lingkaran berputar saat memuat QR | Warna: Garis biru utama (--blue) */
 .spin {
   width: 16px;
   height: 16px;
@@ -569,12 +662,14 @@ input {
   animation: sp .8s linear infinite;
 }
 
+/* Animasi putaran 360 derajat untuk spinner loading */
 @keyframes sp {
   to {
     transform: rotate(360deg);
   }
 }
 
+/* Kotak simulasi layar kamera pemindai petugas | Warna: Latar biru dongker gelap (--t1), teks biru keabu-abuan terang (#aab6d6) */
 .cam {
   background: var(--t1);
   border-radius: 8px;
@@ -587,6 +682,7 @@ input {
   overflow: hidden;
 }
 
+/* Garis laser pemindai yang bergerak naik turun | Warna: Biru langit cerah (#6c95f5) */
 .cam.go::before {
   content: "";
   position: absolute;
@@ -598,6 +694,7 @@ input {
   animation: scan .9s var(--ease) infinite alternate;
 }
 
+/* Animasi gerakan naik-turun garis pemindai kamera */
 @keyframes scan {
   from {
     transform: translateY(0);
@@ -608,6 +705,7 @@ input {
   }
 }
 
+/* Kotak hasil verifikasi setelah QR dipindai */
 .res {
   border-radius: 8px;
   padding: 8px 12px;
@@ -617,16 +715,19 @@ input {
   align-items: center;
 }
 
+/* Kotak hasil verifikasi valid / berhasil | Warna: Latar hijau mint muda (--ok-bg), teks hijau tua (--ok) */
 .res.ok {
   background: var(--ok-bg);
   color: var(--ok);
 }
 
+/* Kotak hasil verifikasi gagal / kedaluwarsa | Warna: Latar merah muda pucat (--bad-bg), teks merah marun tua (--bad) */
 .res.no {
   background: var(--bad-bg);
   color: var(--bad);
 }
 
+/* Tata letak grid 2 kolom untuk detail informasi transaksi */
 .kv {
   display: grid;
   grid-template-columns: 96px 1fr;
@@ -636,6 +737,7 @@ input {
 }
 
 /* ---------- 9. Filter, tabel riwayat, dan pagination ---------- */
+/* Wadah tombol filter segmen di halaman Riwayat Petugas | Warna: Latar biru keabu-abuan muda (#E2E9F6) */
 .seg {
   display: flex;
   background: #E2E9F6;
@@ -644,6 +746,7 @@ input {
   gap: 4px;
 }
 
+/* Tombol pilihan filter yang tidak aktif | Warna: Latar transparan, teks gelap (--t1) */
 .seg button {
   flex: 1 1 auto;
   padding: 0 8px;
@@ -660,15 +763,18 @@ input {
     color .15s var(--ease);
 }
 
+/* Tombol pilihan filter yang sedang dipilih | Warna: Latar biru utama (--blue), teks putih (#fff) */
 .seg button.on {
   background: var(--blue);
   color: #fff;
 }
 
+/* Pembungkus tabel agar bisa digeser horizontal jika layar sempit */
 .tw {
   overflow-x: auto;
 }
 
+/* Tabel riwayat peminjaman petugas */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -676,6 +782,7 @@ table {
   line-height: 20px;
 }
 
+/* Sel kepala tabel (header kolom) | Warna: Latar biru keabu-abuan muda (#E2E9F6), teks abu-abu kebiruan (--t2) */
 th {
   background: #E2E9F6;
   text-align: left;
@@ -684,26 +791,31 @@ th {
   color: var(--t2);
 }
 
+/* Sel isi baris tabel | Warna: Garis pemisah bawah tipis (--bd) */
 td {
   padding: 12px 8px;
   border-bottom: 1px solid var(--bd);
 }
 
+/* Baris tabel yang dapat diklik */
 tr.rw {
   cursor: pointer;
 }
 
+/* Baris tabel saat disorot kursor atau dipilih | Warna: Latar biru sangat pucat (--blue-t) */
 tr.rw:hover,
 tr.sel {
   background: var(--blue-t);
 }
 
+/* Wadah tombol nomor halaman (pagination) di bawah tabel */
 .pg {
   display: flex;
   gap: 4px;
   justify-content: center;
 }
 
+/* Tombol nomor halaman tabel | Warna: Latar putih (#fff), teks gelap (--t1), garis tipis (--bd) */
 .pg button {
   width: 44px;
   height: 44px;
@@ -717,6 +829,7 @@ tr.sel {
   place-items: center;
 }
 
+/* Tombol nomor halaman yang sedang aktif | Warna: Latar & garis biru utama (--blue), teks putih (#fff) */
 .pg button.on {
   background: var(--blue);
   color: #fff;
@@ -724,6 +837,7 @@ tr.sel {
 }
 
 /* ---------- 10. Footer, dialog konfirmasi, dan notifikasi ---------- */
+/* Bagian kaki paling bawah layar (Bantuan | Kontak Pramu) | Warna: Latar putih (--surf), teks abu-abu (--t2) */
 footer {
   padding: 16px;
   text-align: center;
@@ -733,18 +847,21 @@ footer {
   border-top: 1px solid var(--bd);
 }
 
+/* Footer khusus halaman Pindai Petugas (penghitung jumlah dipinjam/selesai) | Warna: Teks gelap (--t1) */
 footer.cnt {
   font-family: var(--mono);
   color: var(--t1);
   font-weight: 500;
 }
 
+/* Tautan link di dalam footer | Warna: Biru utama (--blue) */
 footer a {
   color: var(--blue);
   text-decoration: none;
   font-weight: 500;
 }
 
+/* Lapisan gelap transparan di belakang jendela konfirmasi (modal) | Warna: Biru dongker gelap transparan 60% */
 .ov-bg {
   position: absolute;
   inset: 0;
@@ -756,12 +873,14 @@ footer a {
   animation: fd .2s var(--ease);
 }
 
+/* Animasi muncul perlahan (fade-in) untuk latar belakang modal */
 @keyframes fd {
   from {
     opacity: 0;
   }
 }
 
+/* Kotak pop-up dialog konfirmasi pembatalan | Warna: Latar putih (#fff) */
 .modal {
   background: #fff;
   border-radius: 16px;
@@ -776,6 +895,7 @@ footer a {
   box-shadow: 0 8px 24px rgba(10, 25, 54, .2);
 }
 
+/* Animasi muncul membesar lembut untuk kotak modal */
 @keyframes sc {
   from {
     transform: translateY(8px);
@@ -783,6 +903,7 @@ footer a {
   }
 }
 
+/* Tombol tutup "X" di pojok kanan atas modal | Warna: Latar transparan, ikon gelap (--t1) */
 .x {
   position: absolute;
   top: 8px;
@@ -798,10 +919,12 @@ footer a {
   border-radius: 8px;
 }
 
+/* Tombol tutup "X" saat kursor diarahkan | Warna: Latar biru sangat pucat (--blue-t) */
 .x:hover {
   background: var(--blue-t);
 }
 
+/* Kotak ikon peringatan di dalam pop-up modal | Warna: Latar merah muda pucat (--bad-bg), ikon merah marun (--bad) */
 .modal .ib {
   width: 40px;
   height: 40px;
@@ -812,6 +935,7 @@ footer a {
   place-items: center;
 }
 
+/* Pesan notifikasi melayang (toast) di bagian bawah layar | Warna: Latar biru dongker gelap (--t1), teks putih (#fff) */
 .toast {
   position: absolute;
   left: 50%;
@@ -827,6 +951,7 @@ footer a {
   max-width: 90%;
 }
 
+/* Kotak wadah ikon di dalam kartu layanan Beranda (.card) | Warna: Latar biru sangat pucat (--blue-t), ikon biru utama (--blue) */
 .ic {
   width: 44px;
   height: 44px;
@@ -838,17 +963,19 @@ footer a {
   flex: none;
 }
 
+/* Susunan horizontal ikon dan teks judul di dalam kartu Beranda */
 .hd {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+/* Gaya teks angka besar (32px tebal monospace) */
 .big {
   font: 700 32px/40px var(--mono);
 }
 
-/* Hormati pengaturan aksesibilitas untuk mengurangi gerakan animasi. */
+/* Menonaktifkan semua animasi jika pengguna mengaktifkan fitur "Reduce Motion" di perangkatnya */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
